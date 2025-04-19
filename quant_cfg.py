@@ -8,13 +8,10 @@ def get_nbit():
 
 # TODO: Make your own quant config for DeiT-S
 def get_quant_config_deit(model):
-    nbits = get_nbit()  # 🧠 動態抓取
-    print(f"Running quant_config_slm with nbits={nbits}")
-
     quant_config = {}
     
     n_blocks = len(model.blocks)
-    q2_config = BaseQuantizeConfig(nbits=nbits, group_size=64)
+    q2_config = BaseQuantizeConfig(nbits=8, group_size=64)
     for i in range(n_blocks):
         quant_config[f'blocks.{i}.attn.qkv'] = q2_config
         quant_config[f'blocks.{i}.attn.proj'] = q2_config
@@ -25,7 +22,6 @@ def get_quant_config_deit(model):
 
 # TODO: Make your own quant config for Language Model
 def get_quant_config_slm(model):
-    
     nbits = get_nbit()  # 🧠 動態抓取
     print(f"Running quant_config_slm with nbits={nbits}")
     quant_config = {}

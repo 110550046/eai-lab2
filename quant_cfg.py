@@ -2,6 +2,8 @@ from hqq.core.quantize import BaseQuantizeConfig
 from hqq.core.quantize import BaseQuantizeConfig
 import os
 
+print("✅ [quant_cfg.py] loaded!")
+
 def get_nbit():
     return int(os.environ.get("HQQ_BIT", 4))  # 預設是 4-bit
 

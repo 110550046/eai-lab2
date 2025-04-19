@@ -27,10 +27,13 @@ def get_quant_config_deit(model):
 
 # TODO: Make your own quant config for Language Model
 def get_quant_config_slm(model):
+    
+    nbits = get_nbit()  # 🧠 動態抓取
+    print(f"Running quant_config_slm with nbits={nbits}")
     quant_config = {}
     
     n_layers = model.config.num_hidden_layers
-    q2_config = BaseQuantizeConfig(nbits=2, group_size=64) 
+    q2_config = BaseQuantizeConfig(nbits=nbits, group_size=64) 
     
     for i in range(n_layers):
         quant_config[f'model.layers.{i}.self_attn.q_proj'] = q2_config
